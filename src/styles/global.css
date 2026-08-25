@@ -126,7 +126,8 @@ a {
   inset: 0;
   z-index: 20;
   pointer-events: none;
-  transition: opacity 400ms var(--ease-out);
+  visibility: visible;
+  transition: opacity 400ms var(--ease-out), visibility 0s linear;
 }
 
 .home-overlay.is-dim {
@@ -137,8 +138,13 @@ a {
   pointer-events: none;
 }
 
+/* visibility (delayed until the fade completes) drops the hidden HUD out
+   of the tab order and the accessibility tree — opacity alone leaves
+   invisible links focusable */
 .home-overlay.is-hidden {
   opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms var(--ease-out), visibility 0s linear 400ms;
 }
 
 .home-overlay.is-hidden .footer-nav {

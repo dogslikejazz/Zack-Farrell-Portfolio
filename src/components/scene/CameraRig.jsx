@@ -106,7 +106,10 @@ export default function CameraRig() {
     if (s.phase === 'returning') {
       const { objectPos, divePos } = targetOf(s.targetId, narrow)
       if (s.t0 === null) {
-        if (s.reducedMotion) {
+        // No fade covering the screen (browser back) — teleporting to the
+        // dive pose would be a visible jump-cut. The camera is already
+        // parked at the idle pose, so just settle where we are.
+        if (s.reducedMotion || !s.fade) {
           s.settle()
           return
         }

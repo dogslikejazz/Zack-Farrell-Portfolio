@@ -46,7 +46,7 @@ ffmpeg -i broll.mov -t 18 -an -vf "scale=1920:-2,fps=24" -c:v libvpx-vp9 -crf 38
 ffmpeg -i public/video/bg-loop.mp4 -frames:v 1 -q:v 3 public/video/poster.jpg
 ```
 
-Keep `bg-loop.mp4` under ~10MB (raise `-crf` a little if it's over). The `.webm` is optional but smaller. Copy `poster.jpg` over `public/fallback/home-static.jpg` too.
+Keep `bg-loop.mp4` under ~10MB (raise `-crf` a little if it's over). The `.webm` is optional but smaller — if you export it, also add `<source src="/video/bg-loop.webm" type="video/webm" />` above the mp4 source in `src/components/VideoBackground.jsx`. Copy `poster.jpg` over `public/fallback/home-static.jpg` too.
 The current video is a Pexels placeholder (night highway) — details in `public/video/ATTRIBUTION.md`.
 
 ## Swap in YOUR 3D models (from Blender)

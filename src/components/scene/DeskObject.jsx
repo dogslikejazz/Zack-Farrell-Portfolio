@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Html, useCursor, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -63,6 +63,12 @@ export default function DeskObject({
   const pos = objectPosition({ position, mobilePosition }, narrow)
   useCursor(hovered && phase === 'idle')
 
+  // The dive moves the object out from under the pointer without firing
+  // pointerout — clear the hover so labels/cursor can't stick on return.
+  useEffect(() => {
+    if (phase !== 'idle' && hovered) setHovered(false)
+  }, [phase, hovered])
+
   useFrame((_, dt) => {
     if (!liftRef.current) return
     const s = useStore.getState()
@@ -103,7 +109,7 @@ export default function DeskObject({
         </mesh>
         <Html
           center
-          position={[0, size * 1.35, 0]}
+          position={[0, size * 0.7, 0]}
           zIndexRange={[15, 0]}
           style={{ pointerEvents: 'none' }}
         >

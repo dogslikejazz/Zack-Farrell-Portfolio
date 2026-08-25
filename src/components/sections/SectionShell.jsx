@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../../store'
 
@@ -5,23 +6,33 @@ import { useStore } from '../../store'
 // header, back button, scrollable body.
 export default function SectionShell({ index, sub, title, children }) {
   const navigate = useNavigate()
+  const exitTimer = useRef(null)
+
+  // The dive keeps the black fade up until the section is actually on
+  // screen — dropping it here (not on a fixed timer) means a slow lazy
+  // chunk can never reveal an empty desk mid-transition.
+  useEffect(() => {
+    const s = useStore.getState()
+    if (s.fade && s.phase === 'section') s.setFade(false)
+    return () => clearTimeout(exitTimer.current)
+  }, [])
 
   const onBack = () => {
     const s = useStore.getState()
-    if (s.phase !== 'section') return
-    s.setFade(true)
-    if (s.reducedMotion) {
-      setTimeout(() => {
-        navigate('/')
-        s.jumpTo('idle')
-      }, 300)
-    } else {
-      // Fade to black over the section, then reverse-zoom out of the object
-      setTimeout(() => {
-        navigate('/')
-        s.beginReturn()
-      }, 380)
+    if (!s.requestExit()) return
+    if (s.reducedMotion || s.webgl === false || s.webglFailed) {
+      // No camera rig to animate (or the user asked for no motion):
+      // cut straight home. Never raise the fade — nothing would clear it.
+      navigate('/')
+      s.jumpTo('idle')
+      return
     }
+    // Fade to black over the section, then reverse-zoom out of the object
+    s.setFade(true)
+    exitTimer.current = setTimeout(() => {
+      navigate('/')
+      s.beginReturn()
+    }, 380)
   }
 
   return (

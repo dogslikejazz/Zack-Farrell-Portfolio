@@ -1,27 +1,45 @@
-import { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useStore } from './store'
 import TransitionController from './TransitionController'
 import VideoBackground from './components/VideoBackground'
 import StaticHome from './components/StaticHome'
-import DeskCanvas from './components/scene/DeskCanvas'
 import HomeOverlay from './components/ui/HomeOverlay'
 import TransitionFade from './components/ui/TransitionFade'
 import Letterbox from './components/ui/Letterbox'
-import Loader from './components/ui/Loader'
 import useWebGLSupport from './hooks/useWebGLSupport'
 import useIsTouch from './hooks/useIsTouch'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 
+// The whole three.js stack lives behind this import — visitors without
+// WebGL never download it.
+const DeskCanvas = lazy(() => import('./components/scene/DeskCanvas'))
 const PhotographyGallery = lazy(() => import('./components/sections/PhotographyGallery'))
 const FilmsGrid = lazy(() => import('./components/sections/FilmsGrid'))
+
+// A renderer crash anywhere under the canvas downgrades to the static
+// experience instead of white-screening the site.
+class CanvasBoundary extends React.Component {
+  state = { failed: false }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  componentDidCatch() {
+    useStore.getState().markWebglFailed()
+  }
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
+}
 
 // Fixed-layer stack, bottom to top:
 //   z0  video   z10 canvas   z15 vignette   z20 home UI
 //   z30 section overlays     z35 letterbox  z40 fade
 //   z50 loader  z60 grain
 export default function App() {
-  const webgl = useWebGLSupport()
+  const webglSupported = useWebGLSupport()
+  const webglFailed = useStore((s) => s.webglFailed)
+  const webgl = webglSupported && !webglFailed
   const isTouch = useIsTouch()
   const reducedMotion = usePrefersReducedMotion()
 
@@ -29,11 +47,23 @@ export default function App() {
     useStore.getState().setReducedMotion(reducedMotion)
   }, [reducedMotion])
 
+  useEffect(() => {
+    useStore.getState().setWebgl(webgl)
+  }, [webgl])
+
   return (
     <BrowserRouter>
       <TransitionController />
       <VideoBackground />
-      {webgl ? <DeskCanvas isTouch={isTouch} /> : <StaticHome />}
+      {webgl ? (
+        <CanvasBoundary>
+          <Suspense fallback={null}>
+            <DeskCanvas isTouch={isTouch} />
+          </Suspense>
+        </CanvasBoundary>
+      ) : (
+        <StaticHome />
+      )}
       <div className="vignette" aria-hidden="true" />
       {webgl && <HomeOverlay isTouch={isTouch} webgl={webgl} />}
       <Routes>
@@ -58,7 +88,6 @@ export default function App() {
       </Routes>
       <Letterbox />
       <TransitionFade />
-      {webgl && <Loader />}
       <div className="grain" aria-hidden="true" />
     </BrowserRouter>
   )

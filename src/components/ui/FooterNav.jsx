@@ -9,6 +9,12 @@ import { playSfx } from '../../lib/sfx'
 export default function FooterNav({ webgl }) {
   const onNav = (e, obj) => {
     const s = useStore.getState()
+    // Mid-transition (dive/return) the HUD is dimmed but still in the DOM:
+    // swallow keyboard activations instead of navigating under the animation.
+    if (webgl && !s.reducedMotion && s.phase !== 'idle') {
+      e.preventDefault()
+      return
+    }
     if (webgl && !s.reducedMotion && s.phase === 'idle') {
       e.preventDefault()
       playSfx(obj.sound)

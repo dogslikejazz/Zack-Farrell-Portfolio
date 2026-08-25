@@ -16,6 +16,13 @@ export default function TransitionController() {
   useEffect(() => {
     const s = useStore.getState()
     const obj = deskObjects.find((o) => o.route === location.pathname)
+    if (s.phase === 'focusing') {
+      // The URL moved mid-dive (browser back/forward): the user wins.
+      // Abort the dive and cut straight to wherever they navigated.
+      if (obj) s.jumpTo('section', obj.id)
+      else s.jumpTo('idle')
+      return
+    }
     if (obj) {
       const shouldJump =
         s.phase === 'idle' ||
@@ -29,16 +36,14 @@ export default function TransitionController() {
     }
   }, [location.pathname])
 
-  // State → URL: the dive finished, reveal the section
+  // State → URL: the dive finished, reveal the section. The fade stays up
+  // until the section itself mounts and drops it (SectionShell) — no timer
+  // here to race a slow lazy chunk.
   useEffect(() => {
     const s = useStore.getState()
     if (phase === 'section' && prevPhase.current === 'focusing') {
       const obj = deskObjects.find((o) => o.id === s.targetId)
       if (obj && location.pathname !== obj.route) navigate(obj.route)
-      // Give the overlay a beat to mount under the opaque fade, then reveal
-      const t = setTimeout(() => useStore.getState().setFade(false), 180)
-      prevPhase.current = phase
-      return () => clearTimeout(t)
     }
     prevPhase.current = phase
   }, [phase]) // eslint-disable-line react-hooks/exhaustive-deps

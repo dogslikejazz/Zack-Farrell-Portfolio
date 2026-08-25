@@ -46,7 +46,7 @@ export const deskObjects = [
     model: '/models/clapperboard.glb',
     sound: '/sfx/clap.mp3',
     position: [1.2, 0, -0.1],
-    mobilePosition: [0.55, 0, 1.15],
+    mobilePosition: [0.4, 0, 1.15],
     rotationY: -0.45,
     size: 1.15,
     hoverLift: 0.09,

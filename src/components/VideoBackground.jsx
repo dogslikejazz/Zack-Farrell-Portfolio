@@ -29,7 +29,7 @@ export default function VideoBackground() {
           preload="auto"
           poster="/video/poster.jpg"
         >
-          <source src="/video/bg-loop.webm" type="video/webm" />
+          {/* If you export a webm (see README), add its <source> above the mp4 */}
           <source src="/video/bg-loop.mp4" type="video/mp4" />
         </video>
       )}

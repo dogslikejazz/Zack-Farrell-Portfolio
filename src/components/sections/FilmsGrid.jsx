@@ -6,14 +6,22 @@ import SectionShell from './SectionShell'
 // clicked — zero third-party JS on page load.
 function FilmCard({ film }) {
   const [playing, setPlaying] = useState(false)
-  const local = film.source === 'local'
+  // Content files are hand-edited: anything that isn't a recognized source
+  // with a real videoId renders as a "coming soon" card, never a broken embed.
+  const videoId =
+    typeof film.videoId === 'string' && film.videoId.trim() !== ''
+      ? encodeURIComponent(film.videoId.trim())
+      : null
+  const source = film.source === 'youtube' || film.source === 'vimeo' ? film.source : 'local'
+  const local = source === 'local' || videoId === null
   const thumb =
     film.thumb ||
-    (film.source === 'youtube' ? `https://i.ytimg.com/vi/${film.videoId}/hqdefault.jpg` : '')
-  const embed =
-    film.source === 'youtube'
-      ? `https://www.youtube-nocookie.com/embed/${film.videoId}?autoplay=1&rel=0`
-      : `https://player.vimeo.com/video/${film.videoId}?autoplay=1`
+    (source === 'youtube' && videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : '')
+  const embed = local
+    ? null
+    : source === 'youtube'
+      ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`
+      : `https://player.vimeo.com/video/${videoId}?autoplay=1`
 
   return (
     <article className={`film-card ${local ? 'is-local' : ''}`}>
