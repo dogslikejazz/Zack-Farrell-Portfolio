@@ -518,6 +518,8 @@ a {
 
 .masonry-btn img {
   width: 100%;
+  /* keep the width/height attributes as aspect ratio only, not fixed px */
+  height: auto;
 }
 
 .masonry-item figcaption {
