@@ -3,3 +3,7 @@ dist
 .vercel
 *.local
 .DS_Store
+
+# Full-resolution photo originals (13-29MB each) — web-sized copies are
+# generated into public/photos/. Keep masters out of git and off the site.
+photo-masters
