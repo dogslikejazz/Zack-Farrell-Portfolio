@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#121214"/>
+  <rect x="24" y="24" width="1552" height="852" fill="none" stroke="#2a2a2e" stroke-width="2"/>
+  <path d="M 60 100 V 60 H 100" fill="none" stroke="#3d3d42" stroke-width="3"/>
+  <path d="M 1500 60 H 1540 V 100" fill="none" stroke="#3d3d42" stroke-width="3"/>
+  <path d="M 60 800 V 840 H 100" fill="none" stroke="#3d3d42" stroke-width="3"/>
+  <path d="M 1500 840 H 1540 V 800" fill="none" stroke="#3d3d42" stroke-width="3"/>
+  <circle cx="800" cy="380" r="10" fill="#ff4022"/>
+  <text x="800" y="454" text-anchor="middle" font-family="Courier New,monospace" font-size="44" letter-spacing="14" fill="#f2efe9">BUILD 02</text>
+  <text x="800" y="514" text-anchor="middle" font-family="Courier New,monospace" font-size="24" letter-spacing="8" fill="#5c5c63">YOUR GAME HERE</text>
+</svg>

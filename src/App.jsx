@@ -16,6 +16,8 @@ import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
 const DeskCanvas = lazy(() => import('./components/scene/DeskCanvas'))
 const PhotographyGallery = lazy(() => import('./components/sections/PhotographyGallery'))
 const FilmsGrid = lazy(() => import('./components/sections/FilmsGrid'))
+const MusicSection = lazy(() => import('./components/sections/MusicSection'))
+const GameDevSection = lazy(() => import('./components/sections/GameDevSection'))
 
 // A renderer crash anywhere under the canvas downgrades to the static
 // experience instead of white-screening the site.
@@ -81,6 +83,22 @@ export default function App() {
           element={
             <Suspense fallback={null}>
               <FilmsGrid />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/music"
+          element={
+            <Suspense fallback={null}>
+              <MusicSection />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gamedev"
+          element={
+            <Suspense fallback={null}>
+              <GameDevSection />
             </Suspense>
           }
         />

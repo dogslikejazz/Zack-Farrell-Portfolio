@@ -12,7 +12,7 @@ export default function DeskCanvas({ isTouch }) {
   return (
     <>
       <Canvas
-        camera={{ position: [0, 7, 2.2], fov: 35, near: 0.1, far: 50 }}
+        camera={{ position: [0, 7.4, 2.3], fov: 35, near: 0.1, far: 50 }}
         gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
         dpr={[1, 2]}
         // The scene sits behind an opaque overlay while a section is open —

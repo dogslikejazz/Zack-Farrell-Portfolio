@@ -5,8 +5,9 @@ import { easing } from 'maath'
 import { useStore } from '../../store'
 import { deskObjects, NARROW_ASPECT, objectPosition } from '../../content/deskObjects'
 
-const IDLE_POS = new THREE.Vector3(0, 7, 2.2)
-const IDLE_POS_NARROW = new THREE.Vector3(0, 8.3, 2.4)
+// Pulled back far enough to frame all four objects (desk spans ~±2.3)
+const IDLE_POS = new THREE.Vector3(0, 7.4, 2.3)
+const IDLE_POS_NARROW = new THREE.Vector3(0, 9.2, 2.5)
 const ORIGIN = new THREE.Vector3(0, 0, 0)
 const IDLE_FOV = 35
 const DIVE_FOV = 28
@@ -47,13 +48,16 @@ export default function CameraRig() {
     if (s.phase === 'idle') {
       const px = s.reducedMotion ? 0 : state.pointer.x
       const py = s.reducedMotion ? 0 : state.pointer.y
+      // Pure pan: the look target carries the same offset as the camera, so
+      // the parallax is a subtle lateral drift — re-aiming at the origin
+      // instead would visibly tilt the whole row of objects.
       easing.damp3(
         camera.position,
-        [idlePos.x + px * 0.35, idlePos.y, idlePos.z - py * 0.25],
+        [idlePos.x + px * 0.22, idlePos.y, idlePos.z - py * 0.14],
         0.5,
         dt,
       )
-      easing.damp3(look.current, [0, 0, 0], 0.5, dt)
+      easing.damp3(look.current, [px * 0.22, 0, -py * 0.14], 0.5, dt)
       camera.lookAt(look.current)
       if (camera.fov !== IDLE_FOV) {
         camera.fov = IDLE_FOV

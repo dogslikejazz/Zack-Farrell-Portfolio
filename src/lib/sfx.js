@@ -8,12 +8,12 @@ export function preloadSfx(src) {
   }
 }
 
-export function playSfx(src) {
+export function playSfx(src, volume = 0.9) {
   preloadSfx(src)
   const audio = cache.get(src)
   try {
     audio.currentTime = 0
-    audio.volume = 0.9
+    audio.volume = volume
     audio.play().catch(() => {})
   } catch {
     // missing or blocked audio should never break navigation

@@ -17,6 +17,7 @@ export const site = {
   // Safe to remove an entry once you replace that asset with your own.
   // Full details: public/models/ATTRIBUTION.md, public/video/ATTRIBUTION.md
   credits: [
-    { label: 'CAMERA MODEL: DOOK (CC-BY)', url: 'https://poly.pizza/m/7IV9LlcdNB' },
+    { label: 'CAMERA: GABRIEL VALDIVIA (CC-BY)', url: 'https://poly.pizza/m/eAoNPV5bfmK' },
+    { label: 'CONTROLLER: POLY BY GOOGLE (CC-BY)', url: 'https://poly.pizza/m/6365MG_Pr_f' },
   ],
 }

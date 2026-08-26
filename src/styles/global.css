@@ -708,6 +708,208 @@ a {
   max-width: 56ch;
 }
 
+/* ── Music grid ────────────────────────────────────────────── */
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 34px;
+}
+
+.music-frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+
+/* While a player is loaded the frame hugs the embed's own height
+   (fixed px for Spotify/SoundCloud, 16:9 for a YouTube video) */
+.music-frame.is-playing {
+  aspect-ratio: auto;
+}
+
+.music-frame.is-video {
+  aspect-ratio: 16 / 9;
+}
+
+.music-frame iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+.music-frame.is-video iframe {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.music-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  display: block;
+}
+
+.music-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease-out), opacity 300ms;
+}
+
+.music-cover:not(:disabled):hover img,
+.music-cover:not(:disabled):focus-visible img {
+  transform: scale(1.04);
+}
+
+.music-cover:disabled {
+  cursor: default;
+}
+
+.music-cover-empty {
+  position: absolute;
+  inset: 0;
+  background: var(--panel);
+}
+
+.music-cover:not(:disabled):hover .play-badge,
+.music-cover:not(:disabled):focus-visible .play-badge {
+  background: var(--tally);
+  border-color: var(--tally);
+  color: var(--ink);
+}
+
+.is-local .music-cover img {
+  opacity: 0.45;
+  filter: grayscale(0.4);
+}
+
+.music-meta {
+  padding: 16px 2px 0;
+}
+
+.music-meta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.music-role {
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--tally);
+}
+
+.music-desc {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--bone-dim);
+  max-width: 56ch;
+}
+
+/* ── Game dev grid ─────────────────────────────────────────── */
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 34px;
+}
+
+.game-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+
+.game-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.is-wip .game-frame img {
+  opacity: 0.45;
+  filter: grayscale(0.4);
+}
+
+.game-frame-empty {
+  position: absolute;
+  inset: 0;
+  background: var(--panel);
+}
+
+.engine-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  color: var(--bone);
+  border: 1px solid var(--bone-faint);
+  background: rgba(10, 10, 11, 0.65);
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.game-meta {
+  padding: 16px 2px 0;
+}
+
+.game-meta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.game-role {
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--tally);
+}
+
+.game-desc {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--bone-dim);
+  max-width: 56ch;
+}
+
+.game-links {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.game-links a {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+  color: var(--bone-dim);
+  border: 1px solid var(--hairline);
+  padding: 8px 14px;
+  transition: color 200ms, border-color 200ms, background 200ms;
+}
+
+.game-links a:hover,
+.game-links a:focus-visible {
+  color: var(--ink);
+  background: var(--bone);
+  border-color: var(--bone);
+}
+
 /* ── Static (no-WebGL) home ────────────────────────────────── */
 
 .static-home {
@@ -823,7 +1025,9 @@ a {
     columns: 1;
   }
 
-  .films-grid {
+  .films-grid,
+  .games-grid,
+  .music-grid {
     grid-template-columns: 1fr;
   }
 
