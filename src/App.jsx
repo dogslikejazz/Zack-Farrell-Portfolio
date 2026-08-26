@@ -79,7 +79,7 @@ export default function App() {
           }
         />
         <Route
-          path="/films"
+          path="/videography"
           element={
             <Suspense fallback={null}>
               <FilmsGrid />

@@ -44,7 +44,6 @@ class ModelBoundary extends React.Component {
 export default function DeskObject({
   id,
   label,
-  sub,
   model,
   sound,
   position,
@@ -114,8 +113,10 @@ export default function DeskObject({
           style={{ pointerEvents: 'none' }}
         >
           <div className={`desk-label ${showLabel ? 'is-on' : ''}`}>
-            <span className="desk-label-main">[ {label} ]</span>
-            <span className="desk-label-sub">{sub}</span>
+            <span className="desk-label-main">
+              <span className="desk-label-bracket">[</span> {label}{' '}
+              <span className="desk-label-bracket">]</span>
+            </span>
           </div>
         </Html>
       </group>

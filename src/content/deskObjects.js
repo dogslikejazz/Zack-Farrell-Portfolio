@@ -26,7 +26,6 @@ export const deskObjects = [
   {
     id: 'photography',
     label: 'PHOTOGRAPHY',
-    sub: 'STILLS',
     route: '/photography',
     model: '/models/camera.glb',
     sound: '/sfx/shutter.mp3',
@@ -41,9 +40,8 @@ export const deskObjects = [
   },
   {
     id: 'films',
-    label: 'FILMS',
-    sub: 'MOTION',
-    route: '/films',
+    label: 'VIDEOGRAPHY',
+    route: '/videography',
     model: '/models/clapperboard.glb',
     sound: '/sfx/clap.mp3',
     position: [-0.9, 0, -0.15],
@@ -56,7 +54,6 @@ export const deskObjects = [
   {
     id: 'music',
     label: 'MUSIC',
-    sub: 'AUDIO',
     route: '/music',
     model: '/models/headphones.glb',
     sound: '/sfx/music.mp3',
@@ -71,7 +68,6 @@ export const deskObjects = [
   {
     id: 'gamedev',
     label: 'GAME DEVELOPMENT',
-    sub: 'INTERACTIVE',
     route: '/gamedev',
     model: '/models/controller.glb',
     sound: '/sfx/game.mp3',

@@ -319,6 +319,12 @@ a {
   transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
   white-space: nowrap;
   text-align: center;
+  /* Slate chip behind the text — the b-roll under the labels can hit
+     near-identical tones and make bare text unreadable */
+  background: rgba(10, 10, 11, 0.78);
+  border: 1px solid var(--hairline);
+  padding: 9px 14px;
+  backdrop-filter: blur(3px);
 }
 
 .desk-label.is-on {
@@ -332,14 +338,11 @@ a {
   font-weight: 700;
   letter-spacing: 0.24em;
   color: var(--bone);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
 }
 
-.desk-label-sub {
-  font-size: 10px;
-  letter-spacing: 0.34em;
+/* The tally red lives in the brackets framing the label */
+.desk-label-bracket {
   color: var(--tally);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
 }
 
 /* ── Transition chrome ─────────────────────────────────────── */
