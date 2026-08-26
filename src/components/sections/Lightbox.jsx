@@ -23,7 +23,8 @@ export default function Lightbox({ index, onClose, onNav }) {
       <figure className="lightbox-figure" onClick={(e) => e.stopPropagation()}>
         <img src={photo.src} alt={photo.alt} />
         <figcaption>
-          STILL {String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')} — {photo.caption}
+          STILL {String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
+          {photo.caption ? ` — ${photo.caption}` : ''}
         </figcaption>
       </figure>
       <button type="button" className="lightbox-btn lightbox-close" onClick={onClose} aria-label="Close" autoFocus>

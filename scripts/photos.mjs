@@ -16,7 +16,7 @@
 // and records src/width/height per image in src/content/photos.json,
 // which src/content/photos.js merges with your captions.
 
-import { mkdir, readdir, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 
@@ -30,19 +30,52 @@ const FORCE = process.argv.includes('--force')
 
 const baseOf = (file) => file.replace(ORIGINAL_EXT, '')
 
+// Output/URL-safe name: originals can be called anything ("Santi's
+// Backyard.jpg"), but spaces break srcset syntax and apostrophes make
+// fragile URLs — generated files use a slug ("santis-backyard").
+const slugOf = (file) =>
+  baseOf(file)
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 for (const dir of [ORIGINALS, FULL, THUMBS]) await mkdir(dir, { recursive: true })
 
 // ── 1. Sweep originals dropped into public/photos/full ──────
 // A file there that isn't an output of a known original is a new master.
 let originals = (await readdir(ORIGINALS)).filter((f) => ORIGINAL_EXT.test(f))
-const knownBases = new Set(originals.map(baseOf))
+// A file in full/ is a freshly dropped master unless it's a generated
+// output — either of a current original (slug match) or of a previous
+// run (listed in the old manifest, e.g. after an original was renamed;
+// those are left for the orphan cleanup below).
+const knownSlugs = new Set(originals.map(slugOf))
+const prevOutputs = new Set()
+try {
+  for (const m of JSON.parse(await readFile(MANIFEST, 'utf8'))) {
+    prevOutputs.add(path.basename(m.src))
+    for (const t of Object.values(m.thumbs)) prevOutputs.add(path.basename(t))
+  }
+} catch {
+  // no manifest yet — first run
+}
 for (const f of await readdir(FULL)) {
-  if (ORIGINAL_EXT.test(f) && !knownBases.has(baseOf(f))) {
+  if (ORIGINAL_EXT.test(f) && !knownSlugs.has(baseOf(f)) && !prevOutputs.has(f)) {
     await rename(path.join(FULL, f), path.join(ORIGINALS, f))
     console.log(`moved to photo-originals/: ${f}`)
   }
 }
 originals = (await readdir(ORIGINALS)).filter((f) => ORIGINAL_EXT.test(f)).sort()
+
+const seen = new Map()
+for (const f of originals) {
+  const s = slugOf(f)
+  if (seen.has(s)) {
+    console.error(`name collision: "${f}" and "${seen.get(s)}" both become "${s}" — rename one.`)
+    process.exit(1)
+  }
+  seen.set(s, f)
+}
 
 // ── 2. Generate outputs ─────────────────────────────────────
 const outputsOf = (base) => ({
@@ -79,7 +112,7 @@ const resized = (input, px) =>
 
 const manifest = []
 for (const file of originals) {
-  const base = baseOf(file)
+  const base = slugOf(file)
   const src = path.join(ORIGINALS, file)
   const outs = outputsOf(base)
 
@@ -98,6 +131,7 @@ for (const file of originals) {
   manifest.push({
     name: base,
     file,
+    title: baseOf(file),
     src: `/photos/full/${base}.jpg`,
     width: meta.width,
     height: meta.height,

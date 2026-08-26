@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { photos } from '../../content/photos'
+import useMedia from '../../hooks/useMedia'
 import SectionShell from './SectionShell'
 import Lightbox from './Lightbox'
 
@@ -31,6 +32,24 @@ function MasonryImage({ photo }) {
 
 export default function PhotographyGallery() {
   const [lightbox, setLightbox] = useState(null)
+  const oneCol = useMedia('(max-width: 760px)')
+  const twoCol = useMedia('(max-width: 1100px)')
+  const colCount = oneCol ? 1 : twoCol ? 2 : 3
+
+  // Balanced masonry done in JS instead of CSS columns: each photo goes to
+  // the currently-shortest column (heights known up front from the
+  // manifest), so the layout is deterministic and photos keep display
+  // order — CSS columns rebalanced as images lazy-loaded and left the
+  // last column short partway down the page.
+  const columns = useMemo(() => {
+    const cols = Array.from({ length: colCount }, () => ({ h: 0, items: [] }))
+    photos.forEach((photo, index) => {
+      const col = cols.reduce((a, b) => (b.h < a.h ? b : a))
+      col.items.push({ photo, index })
+      col.h += photo.width && photo.height ? photo.height / photo.width : 1
+    })
+    return cols.map((c) => c.items)
+  }, [colCount])
 
   return (
     <SectionShell index="01" sub="STILLS" title="PHOTOGRAPHY">
@@ -41,20 +60,26 @@ export default function PhotographyGallery() {
         </p>
       ) : (
         <div className="masonry">
-          {photos.map((photo, i) => (
-            <figure key={photo.src} className="masonry-item">
-              <button
-                type="button"
-                className="masonry-btn"
-                onClick={() => setLightbox(i)}
-                aria-label={`Open ${photo.alt}`}
-              >
-                <MasonryImage photo={photo} />
-              </button>
-              <figcaption>
-                STILL {String(i + 1).padStart(2, '0')} — {photo.caption}
-              </figcaption>
-            </figure>
+          {columns.map((items, c) => (
+            <div key={c} className="masonry-col">
+              {items.map(({ photo, index }) => (
+                <figure key={photo.src} className="masonry-item">
+                  <button
+                    type="button"
+                    className="masonry-btn"
+                    onClick={() => setLightbox(index)}
+                    aria-label={`Open ${photo.alt}`}
+                  >
+                    <MasonryImage photo={photo} />
+                  </button>
+                  {photo.caption && (
+                    <figcaption>
+                      STILL {String(index + 1).padStart(2, '0')} — {photo.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
           ))}
         </div>
       )}
