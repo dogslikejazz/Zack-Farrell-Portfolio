@@ -41,7 +41,7 @@ function GameCard({ game }) {
 
 export default function GameDevSection() {
   return (
-    <SectionShell index="04" sub="INTERACTIVE" title="GAME DEV">
+    <SectionShell index="04" sub="INTERACTIVE" title="GAME DEVELOPMENT">
       {games.length === 0 ? (
         <p className="empty-note">
           NO PROJECTS YET — add entries in <code>src/content/games.js</code> (see README).
