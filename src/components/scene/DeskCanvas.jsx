@@ -24,8 +24,11 @@ export default function DeskCanvas({ isTouch }) {
             useStore.getState().markWebglFailed()
           })
         }}
+        // Absolute inside .hero (not fixed): the desk scrolls away with the
+        // HUD as the page moves down to About, instead of staying pinned
+        // under it
         style={{
-          position: 'fixed',
+          position: 'absolute',
           inset: 0,
           zIndex: 10,
           pointerEvents: phase === 'idle' ? 'auto' : 'none',

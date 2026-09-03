@@ -112,7 +112,7 @@ a {
 }
 
 .vignette {
-  position: fixed;
+  position: absolute; /* scoped to .hero — scrolls away with the desk */
   inset: 0;
   z-index: 15;
   pointer-events: none;
