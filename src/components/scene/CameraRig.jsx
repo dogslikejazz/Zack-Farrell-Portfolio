@@ -7,7 +7,7 @@ import { deskObjects, NARROW_ASPECT, objectPosition } from '../../content/deskOb
 
 // Pulled back far enough to frame all four objects (desk spans ~±2.3)
 const IDLE_POS = new THREE.Vector3(0, 7.4, 2.3)
-const IDLE_POS_NARROW = new THREE.Vector3(0, 9.2, 2.5)
+const IDLE_POS_NARROW = new THREE.Vector3(0, 10.6, 2.4)
 const ORIGIN = new THREE.Vector3(0, 0, 0)
 const IDLE_FOV = 35
 const DIVE_FOV = 28

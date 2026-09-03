@@ -4,7 +4,7 @@ import { Html, useCursor, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { easing } from 'maath'
 import { useStore } from '../../store'
-import { NARROW_ASPECT, objectPosition } from '../../content/deskObjects'
+import { NARROW_ASPECT, objectPosition, objectSize } from '../../content/deskObjects'
 import FallbackShape from './FallbackShape'
 
 // Auto-fit whatever model file is dropped in: scale it to `size` world
@@ -48,7 +48,7 @@ export default function DeskObject({
   mobilePosition,
   rotationY,
   tilt = [0, 0],
-  size,
+  size: baseSize,
   hoverLift,
   comingSoon,
   isTouch,
@@ -59,6 +59,7 @@ export default function DeskObject({
   const viewSize = useThree((s) => s.size)
   const narrow = viewSize.width / viewSize.height < NARROW_ASPECT
   const pos = objectPosition({ position, mobilePosition }, narrow)
+  const size = objectSize({ size: baseSize }, narrow)
   useCursor(hovered && phase === 'idle')
 
   // The dive moves the object out from under the pointer without firing
@@ -104,9 +105,11 @@ export default function DeskObject({
           <boxGeometry args={[size * 1.25, size * 0.95, size * 1.25]} />
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
+        {/* Touch screens show every label at once (no hover), so on narrow
+            layouts the chip floats clear above the prop instead of over it */}
         <Html
           center
-          position={[0, size * 0.7, 0]}
+          position={[0, size * (narrow ? 1.05 : 0.7), 0]}
           zIndexRange={[15, 0]}
           style={{ pointerEvents: 'none' }}
         >

@@ -50,11 +50,14 @@ export default function HomeOverlay({ isTouch, webgl }) {
         </div>
       </header>
 
-      <p className="hud-hint" aria-hidden="true">
-        {isTouch ? 'TAP AN OBJECT TO ENTER' : 'HOVER THE DESK — CLICK TO ENTER'}
-      </p>
-
-      <FooterNav webgl={webgl} />
+      {/* Hint and nav stack in one flow so the hint can never collide with
+          the nav when the links wrap onto two rows on a phone */}
+      <div className="hud-foot">
+        <p className="hud-hint" aria-hidden="true">
+          {isTouch ? 'TAP AN OBJECT TO ENTER' : 'HOVER THE DESK — CLICK TO ENTER'}
+        </p>
+        <FooterNav webgl={webgl} />
+      </div>
     </div>
   )
 }

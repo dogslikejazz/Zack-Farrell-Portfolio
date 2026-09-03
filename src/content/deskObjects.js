@@ -18,9 +18,16 @@
 
 // Screens narrower than this width:height ratio use mobilePosition
 export const NARROW_ASPECT = 0.8
+// …and shrink every prop by this much — a phone shows ~1/3 the desk
+// width, so desktop-sized props crowd and clip at the edges
+export const NARROW_SCALE = 0.72
 
 export function objectPosition(obj, narrow) {
   return narrow && obj.mobilePosition ? obj.mobilePosition : obj.position
+}
+
+export function objectSize(obj, narrow) {
+  return narrow ? obj.size * NARROW_SCALE : obj.size
 }
 
 export const deskObjects = [
@@ -30,7 +37,7 @@ export const deskObjects = [
     route: '/photography',
     model: '/models/camera.glb',
     position: [-2.6, 0, 0.05],
-    mobilePosition: [-0.55, 0, -1.15],
+    mobilePosition: [-0.6, 0, -1.15],
     // The model's lens side sits opposite its +z — π flips it toward the viewer
     rotationY: Math.PI - 0.2,
     tilt: [-0.8, 0.04],
@@ -44,7 +51,7 @@ export const deskObjects = [
     route: '/videography',
     model: '/models/clapperboard.glb',
     position: [-0.9, 0, -0.15],
-    mobilePosition: [0.5, 0, -0.35],
+    mobilePosition: [0.6, 0, -0.25],
     rotationY: -0.25,
     size: 1.15,
     hoverLift: 0.09,
@@ -57,7 +64,7 @@ export const deskObjects = [
     route: '/music',
     model: '/models/headphones.glb',
     position: [0.9, 0, 0.05],
-    mobilePosition: [-0.55, 0, 0.45],
+    mobilePosition: [-0.6, 0, 0.6],
     rotationY: 0,
     tilt: [-0.55, -0.05],
     size: 1.05,
@@ -71,7 +78,7 @@ export const deskObjects = [
     route: '/gamedev',
     model: '/models/controller.glb',
     position: [2.6, 0, -0.1],
-    mobilePosition: [0.5, 0, 1.25],
+    mobilePosition: [0.6, 0, 1.45],
     rotationY: -0.2,
     tilt: [-0.2, 0],
     size: 0.9,

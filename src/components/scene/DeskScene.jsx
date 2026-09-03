@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useThree } from '@react-three/fiber'
 import { ContactShadows, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
-import { deskObjects, NARROW_ASPECT, objectPosition } from '../../content/deskObjects'
+import { deskObjects, NARROW_ASPECT, objectPosition, objectSize } from '../../content/deskObjects'
 import DeskObject from './DeskObject'
 import SafeEnvironment from './SafeEnvironment'
 
@@ -44,7 +44,7 @@ export default function DeskScene({ isTouch }) {
           <LightPool
             key={`pool-${o.id}`}
             position={[p[0], -0.03, p[2]]}
-            radius={o.size * 0.95}
+            radius={objectSize(o, narrow) * 0.95}
           />
         )
       })}

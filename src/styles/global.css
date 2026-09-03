@@ -238,11 +238,18 @@ a {
   font-variant-numeric: tabular-nums;
 }
 
-.hud-hint {
+.hud-foot {
   position: absolute;
-  left: 50%;
-  bottom: 108px;
-  transform: translateX(-50%);
+  left: 52px;
+  right: 52px;
+  bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.hud-hint {
+  align-self: center;
   font-size: 11px;
   letter-spacing: 0.3em;
   color: var(--bone-dim);
@@ -263,10 +270,6 @@ a {
 /* ── Footer nav ────────────────────────────────────────────── */
 
 .footer-nav {
-  position: absolute;
-  left: 52px;
-  right: 52px;
-  bottom: 34px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -1032,6 +1035,36 @@ a {
 
 /* ── Responsive ────────────────────────────────────────────── */
 
+/* Nav + fine print side by side needs ~1000px before one of them wraps */
+@media (max-width: 1000px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-fine {
+    text-align: left;
+  }
+}
+
+/* Touch screens show every label at once (no hover) — compact chips,
+   not desktop hover cards, whatever the screen width */
+@media (hover: none) {
+  .desk-label {
+    padding: 5px 9px;
+    gap: 2px;
+  }
+
+  .desk-label-main {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .desk-label-soon {
+    font-size: 7px;
+    letter-spacing: 0.24em;
+  }
+}
 
 @media (max-width: 760px) {
   .hud-head {
@@ -1044,21 +1077,29 @@ a {
     display: none;
   }
 
-  .footer-nav {
+  .hud-foot {
     left: 26px;
     right: 26px;
-    bottom: 24px;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .footer-fine {
-    text-align: left;
+    bottom: 22px;
+    gap: 18px;
   }
 
   .hud-hint {
-    bottom: 132px;
-    width: max-content;
+    align-self: flex-start;
+    font-size: 10px;
+  }
+
+  .footer-nav nav {
+    gap: 8px 20px;
+  }
+
+  .footer-nav nav a {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+
+  .footer-fine {
+    font-size: 9px;
   }
 
   .section-head {
