@@ -2,9 +2,8 @@
 // Each entry = one clickable 3D object on the landing page.
 // To add another object later (e.g. script paper → Writing):
 //   1. Drop its .glb into public/models/
-//   2. Drop its sound into public/sfx/
-//   3. Add an entry here (copy one below, change the values)
-//   4. Add a matching <Route> + section component (see README)
+//   2. Add an entry here (copy one below, change the values)
+//   3. Add a matching <Route> + section component (see README)
 //
 // position: [x, y, z] on the desk (y stays 0 — objects sit on the ground)
 // mobilePosition: used instead of position on narrow/portrait screens,
@@ -14,6 +13,8 @@
 //       natural "tossed on the table" resting angle
 // size: target size in world units (models are auto-scaled to fit this)
 // diveOffset: where the camera ends its dive, relative to the object
+// comingSoon: optional — adds a COMING SOON tag to the hover label
+//       (the object stays clickable; the section shows its own notice)
 
 // Screens narrower than this width:height ratio use mobilePosition
 export const NARROW_ASPECT = 0.8
@@ -28,7 +29,6 @@ export const deskObjects = [
     label: 'PHOTOGRAPHY',
     route: '/photography',
     model: '/models/camera.glb',
-    sound: '/sfx/shutter.mp3',
     position: [-2.6, 0, 0.05],
     mobilePosition: [-0.55, 0, -1.15],
     // The model's lens side sits opposite its +z — π flips it toward the viewer
@@ -43,7 +43,6 @@ export const deskObjects = [
     label: 'VIDEOGRAPHY',
     route: '/videography',
     model: '/models/clapperboard.glb',
-    sound: '/sfx/clap.mp3',
     position: [-0.9, 0, -0.15],
     mobilePosition: [0.5, 0, -0.35],
     rotationY: -0.25,
@@ -54,9 +53,9 @@ export const deskObjects = [
   {
     id: 'music',
     label: 'MUSIC',
+    comingSoon: true,
     route: '/music',
     model: '/models/headphones.glb',
-    sound: '/sfx/music.mp3',
     position: [0.9, 0, 0.05],
     mobilePosition: [-0.55, 0, 0.45],
     rotationY: 0,
@@ -68,9 +67,9 @@ export const deskObjects = [
   {
     id: 'gamedev',
     label: 'GAME DEVELOPMENT',
+    comingSoon: true,
     route: '/gamedev',
     model: '/models/controller.glb',
-    sound: '/sfx/game.mp3',
     position: [2.6, 0, -0.1],
     mobilePosition: [0.5, 0, 1.25],
     rotationY: -0.2,

@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useStore } from '../../store'
 import { deskObjects } from '../../content/deskObjects'
 import { site } from '../../content/site'
-import { playSfx } from '../../lib/sfx'
 
 // Real hrefs (crawlable, keyboard-reachable) that trigger the cinematic
 // dive when the 3D scene is available, and act as plain links otherwise.
@@ -17,7 +16,6 @@ export default function FooterNav({ webgl }) {
     }
     if (webgl && !s.reducedMotion && s.phase === 'idle') {
       e.preventDefault()
-      playSfx(obj.sound)
       s.focus(obj.id)
     }
   }

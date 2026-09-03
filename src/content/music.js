@@ -31,23 +31,5 @@
 //   description: 'One or two lines about the track.',
 // },
 
-export const tracks = [
-  {
-    id: 'track-01',
-    title: 'UNTITLED TRACK',
-    role: 'Producer',
-    year: 2026,
-    source: 'local',
-    cover: '/music/covers/placeholder-track-01.svg',
-    description: 'Replace me in src/content/music.js — see the notes at the top of that file.',
-  },
-  {
-    id: 'track-02',
-    title: 'SECOND SESSION',
-    role: 'Composer / Multi-instrumentalist',
-    year: 2025,
-    source: 'local',
-    cover: '/music/covers/placeholder-track-02.svg',
-    description: 'Replace me in src/content/music.js — see the notes at the top of that file.',
-  },
-]
+// Empty = the section page shows its COMING SOON panel.
+export const tracks = []

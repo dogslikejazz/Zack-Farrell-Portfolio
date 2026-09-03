@@ -5,7 +5,6 @@ import * as THREE from 'three'
 import { easing } from 'maath'
 import { useStore } from '../../store'
 import { NARROW_ASPECT, objectPosition } from '../../content/deskObjects'
-import { playSfx } from '../../lib/sfx'
 import FallbackShape from './FallbackShape'
 
 // Auto-fit whatever model file is dropped in: scale it to `size` world
@@ -45,13 +44,13 @@ export default function DeskObject({
   id,
   label,
   model,
-  sound,
   position,
   mobilePosition,
   rotationY,
   tilt = [0, 0],
   size,
   hoverLift,
+  comingSoon,
   isTouch,
 }) {
   const liftRef = useRef(null)
@@ -79,7 +78,6 @@ export default function DeskObject({
   const activate = () => {
     const s = useStore.getState()
     if (s.phase !== 'idle') return
-    playSfx(sound)
     s.focus(id)
   }
 
@@ -117,6 +115,7 @@ export default function DeskObject({
               <span className="desk-label-bracket">[</span> {label}{' '}
               <span className="desk-label-bracket">]</span>
             </span>
+            {comingSoon && <span className="desk-label-soon">COMING SOON</span>}
           </div>
         </Html>
       </group>

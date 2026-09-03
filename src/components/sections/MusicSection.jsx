@@ -91,9 +91,14 @@ export default function MusicSection() {
   return (
     <SectionShell index="03" sub="AUDIO" title="MUSIC">
       {tracks.length === 0 ? (
-        <p className="empty-note">
-          NO TRACKS YET — add entries in <code>src/content/music.js</code> (see README).
-        </p>
+        <div className="coming-panel">
+          <p className="coming-panel-kicker">STATUS / IN PROGRESS</p>
+          <p className="coming-panel-title">
+            <span className="desk-label-bracket">[</span> COMING SOON{' '}
+            <span className="desk-label-bracket">]</span>
+          </p>
+          <p className="coming-panel-line">New tracks are in the works. Check back soon.</p>
+        </div>
       ) : (
         <div className="music-grid">
           {tracks.map((track) => (

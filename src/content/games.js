@@ -23,27 +23,5 @@
 //   links: [{ label: 'PLAY', url: 'https://your-name.itch.io/my-game' }],
 // },
 
-export const games = [
-  {
-    id: 'game-01',
-    title: 'UNTITLED PROTOTYPE',
-    engine: 'Unity',
-    role: 'Solo Dev',
-    year: 2026,
-    status: 'wip',
-    thumb: '/games/thumbs/placeholder-game-01.svg',
-    description: 'Replace me in src/content/games.js — see the notes at the top of that file.',
-    links: [],
-  },
-  {
-    id: 'game-02',
-    title: 'JAM ENTRY',
-    engine: 'Godot',
-    role: 'Design / Code',
-    year: 2025,
-    status: 'wip',
-    thumb: '/games/thumbs/placeholder-game-02.svg',
-    description: 'Replace me in src/content/games.js — see the notes at the top of that file.',
-    links: [],
-  },
-]
+// Empty = the section page shows its COMING SOON panel.
+export const games = []

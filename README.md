@@ -21,13 +21,14 @@ All your content lives in **`src/content/`** and **`public/`**. You should never
 | Films | `src/content/films.js` + `public/films/` |
 | Background video | `public/video/` |
 | 3D model files | `public/models/` |
-| Click sounds | `public/sfx/` |
 
 ## Add a photo (3 steps)
 
-1. Export it web-sized at [squoosh.app](https://squoosh.app): ≤2000px long edge, JPEG quality ~75, aim ≤500KB. Drop it into `public/photos/full/`.
-2. Make a thumbnail (~500px wide, ≤120KB) with the **same filename** into `public/photos/thumbs/`.
-3. Add one entry in `src/content/photos.js`. Delete the placeholder entries as you go.
+1. Drop the full-res export into `photo-originals/` (gitignored, so 20MB masters never hit git). Name the file what you want the title to be — `Street Light.jpg` becomes the slug `street-light` and hover title "Street Light".
+2. Run `npm run photos`. Generates the lightbox JPG + 800/1600 thumbs (JPG and WebP) into `public/photos/` and updates `src/content/photos.json`. Already-processed photos are skipped.
+3. Add the slug to the `order` array in `src/content/photos.js` where you want it. Unlisted photos fall to the end. Landscapes and portraits are auto-split into two walls by aspect ratio.
+
+Renaming an original + rerunning regenerates under the new name and deletes the old files.
 
 ## Add a film (2 steps)
 
@@ -63,7 +64,7 @@ npx @gltf-transform/cli optimize my-camera.glb public/models/camera.glb --compre
 
 ## Add a THIRD desk object later (script paper → Writing)
 
-1. Drop `public/models/script.glb` and `public/sfx/page.mp3` in place.
+1. Drop `public/models/script.glb` in place.
 2. Copy an entry in `src/content/deskObjects.js`, set `id: 'writing'`, `route: '/writing'`, position it (x: 0, z: 1 puts it front-center).
 3. Create `src/components/sections/WritingSection.jsx` (copy `FilmsGrid.jsx` as a starting point) and add a `<Route path="/writing" ...>` in `src/App.jsx` next to the existing two.
 
@@ -75,6 +76,6 @@ Pushed to GitHub + imported in Vercel = auto-deploys on every push. Framework pr
 
 - `src/store.js` — the transition state machine (`idle → focusing → section → returning`). Think of it as the game manager.
 - `src/components/scene/CameraRig.jsx` — owns the camera every frame, like a Unity `Update()` on the main camera. The dive is a 1.2s eased lerp toward the clicked object.
-- `src/components/scene/DeskObject.jsx` — generic interactive prop: hover lift, label, click → sound + dive. All its data comes from `deskObjects.js`.
+- `src/components/scene/DeskObject.jsx` — generic interactive prop: hover lift, label, click → dive. All its data comes from `deskObjects.js`.
 - `src/TransitionController.jsx` — keeps the URL and the state machine in sync (deep links, browser back).
 - Sections are plain DOM overlays on top of the canvas — the 3D scene never unmounts.

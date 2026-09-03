@@ -1,9 +1,8 @@
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useThree } from '@react-three/fiber'
 import { ContactShadows, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import { deskObjects, NARROW_ASPECT, objectPosition } from '../../content/deskObjects'
-import { preloadSfx } from '../../lib/sfx'
 import DeskObject from './DeskObject'
 import SafeEnvironment from './SafeEnvironment'
 
@@ -33,10 +32,6 @@ function LightPool({ position, radius }) {
 export default function DeskScene({ isTouch }) {
   const viewSize = useThree((s) => s.size)
   const narrow = viewSize.width / viewSize.height < NARROW_ASPECT
-
-  useEffect(() => {
-    deskObjects.forEach((o) => preloadSfx(o.sound))
-  }, [])
 
   return (
     <>

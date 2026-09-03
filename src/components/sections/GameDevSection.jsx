@@ -43,9 +43,14 @@ export default function GameDevSection() {
   return (
     <SectionShell index="04" sub="INTERACTIVE" title="GAME DEVELOPMENT">
       {games.length === 0 ? (
-        <p className="empty-note">
-          NO PROJECTS YET — add entries in <code>src/content/games.js</code> (see README).
-        </p>
+        <div className="coming-panel">
+          <p className="coming-panel-kicker">STATUS / IN PROGRESS</p>
+          <p className="coming-panel-title">
+            <span className="desk-label-bracket">[</span> COMING SOON{' '}
+            <span className="desk-label-bracket">]</span>
+          </p>
+          <p className="coming-panel-line">Projects are in development. Check back soon.</p>
+        </div>
       ) : (
         <div className="games-grid">
           {games.map((game) => (
