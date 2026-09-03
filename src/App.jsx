@@ -10,6 +10,7 @@ import Letterbox from './components/ui/Letterbox'
 import useWebGLSupport from './hooks/useWebGLSupport'
 import useIsTouch from './hooks/useIsTouch'
 import usePrefersReducedMotion from './hooks/usePrefersReducedMotion'
+import { deskObjects } from './content/deskObjects'
 
 // The whole three.js stack lives behind this import — visitors without
 // WebGL never download it.
@@ -18,6 +19,8 @@ const PhotographyGallery = lazy(() => import('./components/sections/PhotographyG
 const FilmsGrid = lazy(() => import('./components/sections/FilmsGrid'))
 const MusicSection = lazy(() => import('./components/sections/MusicSection'))
 const GameDevSection = lazy(() => import('./components/sections/GameDevSection'))
+
+const isShown = (id) => deskObjects.some((o) => o.id === id)
 
 // A renderer crash anywhere under the canvas downgrades to the static
 // experience instead of white-screening the site.
@@ -86,22 +89,28 @@ export default function App() {
             </Suspense>
           }
         />
-        <Route
-          path="/music"
-          element={
-            <Suspense fallback={null}>
-              <MusicSection />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/gamedev"
-          element={
-            <Suspense fallback={null}>
-              <GameDevSection />
-            </Suspense>
-          }
-        />
+        {/* Sections for hidden desk objects are unrouted — the catch-all
+            below sends their URLs back to the desk */}
+        {isShown('music') && (
+          <Route
+            path="/music"
+            element={
+              <Suspense fallback={null}>
+                <MusicSection />
+              </Suspense>
+            }
+          />
+        )}
+        {isShown('gamedev') && (
+          <Route
+            path="/gamedev"
+            element={
+              <Suspense fallback={null}>
+                <GameDevSection />
+              </Suspense>
+            }
+          />
+        )}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Letterbox />
