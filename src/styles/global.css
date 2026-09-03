@@ -345,6 +345,16 @@ a {
   color: var(--tally);
 }
 
+.desk-label-soon {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--ink);
+  background: var(--bone);
+  padding: 3px 7px 2px 9px;
+}
+
 /* ── Transition chrome ─────────────────────────────────────── */
 
 .transition-fade {
@@ -490,6 +500,38 @@ a {
 
 .empty-note code {
   color: var(--tally);
+}
+
+/* ── Coming-soon panel (sections without content yet) ──────── */
+
+.coming-panel {
+  border: 1px solid var(--hairline);
+  padding: 72px 32px 76px;
+  text-align: center;
+  max-width: 720px;
+  margin: 24px auto 0;
+}
+
+.coming-panel-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--bone-faint);
+}
+
+.coming-panel-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 56px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin: 18px 0 14px;
+}
+
+.coming-panel-line {
+  color: var(--bone-dim);
+  letter-spacing: 0.08em;
 }
 
 /* ── Photography: masonry + lightbox ───────────────────────── */
@@ -1040,4 +1082,21 @@ a {
   .lightbox-prev { left: 12px; }
   .lightbox-next { right: 12px; }
   .lightbox-close { top: 12px; right: 12px; }
+}
+
+/* ── Photography: orientation walls ─────────────────────────── */
+
+.orient-group + .orient-group {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--hairline);
+}
+
+.orient-label {
+  margin: 0 0 22px;
+  color: var(--bone-dim);
+}
+
+.orient-label-first {
+  margin-top: 0;
 }

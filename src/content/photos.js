@@ -24,6 +24,8 @@ const order = [
   'josh-on-rock',
   'legs-over-ocean',
   'rocket-launch',
+  'street-light',
+  'flower',
 ]
 
 // Optional per-photo words. caption shows under the photo and in the
@@ -36,8 +38,16 @@ const rank = (name) => {
   return i === -1 ? order.length : i
 }
 
+// Landscapes show first, portraits after — the gallery gives each
+// orientation its own wall. `order` applies within each group.
+export const isPortrait = (p) => p.width && p.height && p.height > p.width
+const group = (p) => (isPortrait(p) ? 1 : 0)
+
 export const photos = [...manifest]
-  .sort((a, b) => rank(a.name) - rank(b.name) || a.name.localeCompare(b.name))
+  .sort(
+    (a, b) =>
+      group(a) - group(b) || rank(a.name) - rank(b.name) || a.name.localeCompare(b.name),
+  )
   .map((m) => ({
     ...m,
     // Kept for anything still reading photo.thumb (single-thumbnail path)

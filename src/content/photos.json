@@ -14,6 +14,20 @@
     }
   },
   {
+    "name": "flower",
+    "file": "Flower.jpg",
+    "title": "Flower",
+    "src": "/photos/full/flower.jpg",
+    "width": 3000,
+    "height": 4500,
+    "thumbs": {
+      "jpg800": "/photos/thumbs/flower-800.jpg",
+      "jpg1600": "/photos/thumbs/flower-1600.jpg",
+      "webp800": "/photos/thumbs/flower-800.webp",
+      "webp1600": "/photos/thumbs/flower-1600.webp"
+    }
+  },
+  {
     "name": "josh-under-tree",
     "file": "Josh Under Tree.jpg",
     "title": "Josh Under Tree",
@@ -109,6 +123,20 @@
       "jpg1600": "/photos/thumbs/santis-backyard-1600.jpg",
       "webp800": "/photos/thumbs/santis-backyard-800.webp",
       "webp1600": "/photos/thumbs/santis-backyard-1600.webp"
+    }
+  },
+  {
+    "name": "street-light",
+    "file": "Street Light.jpg",
+    "title": "Street Light",
+    "src": "/photos/full/street-light.jpg",
+    "width": 3000,
+    "height": 4500,
+    "thumbs": {
+      "jpg800": "/photos/thumbs/street-light-800.jpg",
+      "jpg1600": "/photos/thumbs/street-light-1600.jpg",
+      "webp800": "/photos/thumbs/street-light-800.webp",
+      "webp1600": "/photos/thumbs/street-light-1600.webp"
     }
   },
   {
