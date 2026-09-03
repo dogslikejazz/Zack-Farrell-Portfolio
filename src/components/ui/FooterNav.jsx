@@ -30,6 +30,11 @@ export default function FooterNav({ webgl }) {
         ))}
         {site.about && <a href="#about">ABOUT ↓</a>}
         <a href={`mailto:${site.email}`}>CONTACT</a>
+        {site.resume && (
+          <a href={site.resume} target="_blank" rel="noreferrer">
+            RESUME
+          </a>
+        )}
         {site.socials.map((s) => (
           <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
             {s.label}

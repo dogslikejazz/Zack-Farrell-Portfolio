@@ -106,11 +106,11 @@ export default function PhotographyGallery() {
           <code>npm run photos</code>.
         </p>
       ) : (
-        groups.map((g, i) => (
-          <section key={g.key} className="orient-group" aria-label={`${g.label} photographs`}>
+        groups.map((g) => (
+          <section key={g.key} className="wall" aria-label={`${g.label} photographs`}>
             {/* One group = no header needed; two = label each wall */}
             {groups.length > 1 && (
-              <p className={`slate-row orient-label${i === 0 ? ' orient-label-first' : ''}`}>
+              <p className="slate-row wall-label">
                 <span>{g.label}</span>
                 <span className="slate-divider" aria-hidden="true" />
                 <span>{String(g.items.length).padStart(2, '0')}</span>

@@ -16,7 +16,19 @@ export default function StaticHome() {
           </Link>
         ))}
       </nav>
-      <a className="static-contact" href={`mailto:${site.email}`}>{site.email}</a>
+      <p className="static-links">
+        <a className="static-contact" href={`mailto:${site.email}`}>{site.email}</a>
+        {site.resume && (
+          <a href={site.resume} target="_blank" rel="noreferrer">
+            RESUME
+          </a>
+        )}
+        {site.socials.map((s) => (
+          <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
+            {s.label}
+          </a>
+        ))}
+      </p>
     </div>
   )
 }

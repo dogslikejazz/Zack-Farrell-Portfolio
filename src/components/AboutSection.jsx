@@ -28,6 +28,11 @@ export default function AboutSection() {
           </div>
           <nav className="about-links" aria-label="Contact">
             <a href={`mailto:${site.email}`}>{site.email}</a>
+            {site.resume && (
+              <a href={site.resume} target="_blank" rel="noreferrer">
+                Resume (PDF)
+              </a>
+            )}
             {site.socials.map((s) => (
               <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
                 {s.label}

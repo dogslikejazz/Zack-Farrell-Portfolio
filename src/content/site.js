@@ -9,10 +9,13 @@ export const site = {
   school: 'University of Florida — Media Production',
   email: 'zackfarrell2005@gmail.com',
   socials: [
-    // { label: 'INSTAGRAM', url: 'https://instagram.com/your-handle' },
+    { label: 'INSTAGRAM', url: 'https://www.instagram.com/zackofarrell/' },
+    { label: 'LINKEDIN', url: 'https://www.linkedin.com/in/zackfarrell/' },
     // { label: 'YOUTUBE', url: 'https://youtube.com/@your-channel' },
-    // { label: 'LINKEDIN', url: 'https://linkedin.com/in/your-profile' },
   ],
+  // Resume PDF — drop the file into public/ with this exact name (or change
+  // the name here). Set to null to hide every RESUME link.
+  resume: '/Zack-Farrell-Resume.pdf',
   // About panel under the desk. Headshot: drop a portrait (3:4 works
   // best) into public/about/ and point `headshot` at it. Each string in
   // `paragraphs` is one paragraph.

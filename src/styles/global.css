@@ -299,9 +299,9 @@ a {
 
 .footer-nav {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column; /* nav row, then fine print — 7+ links won't share a row with the credits */
+  align-items: flex-start;
+  gap: 12px;
   pointer-events: auto;
 }
 
@@ -331,7 +331,6 @@ a {
   font-size: 10px;
   letter-spacing: 0.08em;
   color: var(--bone-faint);
-  text-align: right;
 }
 
 .footer-fine a {
@@ -1062,7 +1061,6 @@ a {
 }
 
 .static-contact {
-  margin-top: 28px;
   font-size: 12px;
   color: var(--bone-dim);
 }
@@ -1162,18 +1160,6 @@ a {
 
 /* ── Responsive ────────────────────────────────────────────── */
 
-/* Nav + fine print side by side needs ~1000px before one of them wraps */
-@media (max-width: 1000px) {
-  .footer-nav {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .footer-fine {
-    text-align: left;
-  }
-}
-
 /* Touch screens show every label at once (no hover) — compact chips,
    not desktop hover cards, whatever the screen width */
 @media (hover: none) {
@@ -1270,6 +1256,11 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .films-grid.is-vertical {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
   .lightbox {
     padding: 20px;
   }
@@ -1279,19 +1270,62 @@ a {
   .lightbox-close { top: 12px; right: 12px; }
 }
 
-/* ── Photography: orientation walls ─────────────────────────── */
+/* ── Walls: labelled groups inside a section (photo orientations,
+      films vs social) ───────────────────────────────────────── */
 
-.orient-group + .orient-group {
+.wall + .wall {
   margin-top: 56px;
   padding-top: 40px;
   border-top: 1px solid var(--hairline);
 }
 
-.orient-label {
+.wall-label {
   margin: 0 0 22px;
   color: var(--bone-dim);
 }
 
-.orient-label-first {
-  margin-top: 0;
+.wall-note {
+  margin: 0;
+}
+
+.wall-note a {
+  color: var(--bone);
+  text-decoration-color: var(--tally);
+}
+
+/* Vertical (9:16) short-form cards */
+.films-grid.is-vertical {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 26px;
+}
+
+.film-card.is-vertical .film-frame {
+  aspect-ratio: 9 / 16;
+}
+
+.film-link {
+  text-decoration: none;
+}
+
+.film-link img {
+  transition: transform 500ms var(--ease-out);
+}
+
+.film-link:hover img,
+.film-link:focus-visible img {
+  transform: scale(1.04);
+}
+
+.film-link-tag {
+  top: auto;
+  bottom: 14px;
+}
+
+.static-links {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
 }
