@@ -1,4 +1,5 @@
 import { site } from '../content/site'
+import SocialTiles from './ui/SocialTiles'
 
 // The one section that lives in the page flow instead of an overlay: it
 // sits under the full-height desk hero and slides up over the scene as
@@ -33,12 +34,8 @@ export default function AboutSection() {
                 Resume (PDF)
               </a>
             )}
-            {site.socials.map((s) => (
-              <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
-                {s.label}
-              </a>
-            ))}
           </nav>
+          <SocialTiles className="about-tiles" />
         </div>
       </div>
     </section>
