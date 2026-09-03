@@ -87,7 +87,6 @@ export default function DeskObject({
   return (
     <group
       position={pos}
-      rotation={[tilt[0], rotationY, tilt[1]]}
       onPointerOver={(e) => {
         e.stopPropagation()
         setHovered(true)
@@ -99,26 +98,35 @@ export default function DeskObject({
       }}
     >
       <group ref={liftRef}>
-        <ModelBoundary id={id} model={model} size={size} />
-        {/* Generous invisible hit area so hover doesn't require pixel-perfect aim */}
-        <mesh position={[0, size * 0.4, 0]}>
-          <boxGeometry args={[size * 1.25, size * 0.95, size * 1.25]} />
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-        </mesh>
-        {/* Touch screens show every label at once (no hover), so on narrow
-            layouts the chip floats clear above the prop instead of over it */}
+        {/* Only the prop is tilted — the label anchors in world-up space so
+            a leaned model can't drag its chip sideways or down onto itself */}
+        <group rotation={[tilt[0], rotationY, tilt[1]]}>
+          <ModelBoundary id={id} model={model} size={size} />
+          {/* Generous invisible hit area so hover doesn't require pixel-perfect aim */}
+          <mesh position={[0, size * 0.4, 0]}>
+            <boxGeometry args={[size * 1.25, size * 0.95, size * 1.25]} />
+            <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+          </mesh>
+        </group>
+        {/* Desktop: hover card centred over the prop. Touch/narrow: every
+            label is on at once, so the chip must clear the prop. The idle
+            camera looks almost straight down, so "up on screen" is world -z
+            (away from the viewer), not +y — anchor just past the prop's far
+            edge and let .is-above rest the chip's bottom edge on that point */}
         <Html
           center
-          position={[0, size * (narrow ? 1.05 : 0.7), 0]}
+          position={narrow ? [0, size * 0.5, -size * 0.72] : [0, size * 0.7, 0]}
           zIndexRange={[15, 0]}
           style={{ pointerEvents: 'none' }}
         >
-          <div className={`desk-label ${showLabel ? 'is-on' : ''}`}>
-            <span className="desk-label-main">
-              <span className="desk-label-bracket">[</span> {label}{' '}
-              <span className="desk-label-bracket">]</span>
-            </span>
-            {comingSoon && <span className="desk-label-soon">COMING SOON</span>}
+          <div className={`desk-label-anchor ${narrow ? 'is-above' : ''}`}>
+            <div className={`desk-label ${showLabel ? 'is-on' : ''}`}>
+              <span className="desk-label-main">
+                <span className="desk-label-bracket">[</span> {label}{' '}
+                <span className="desk-label-bracket">]</span>
+              </span>
+              {comingSoon && <span className="desk-label-soon">COMING SOON</span>}
+            </div>
           </div>
         </Html>
       </group>

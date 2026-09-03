@@ -312,6 +312,12 @@ a {
 
 /* ── 3D object labels (drei <Html>) ────────────────────────── */
 
+/* drei centres the chip on its anchor; .is-above lifts it by half its own
+   height so the bottom edge rests on the anchor instead */
+.desk-label-anchor.is-above {
+  transform: translateY(-50%);
+}
+
 .desk-label {
   display: flex;
   flex-direction: column;
@@ -1067,10 +1073,20 @@ a {
 }
 
 @media (max-width: 760px) {
+  .vf-bracket {
+    width: 22px;
+    height: 22px;
+  }
+
+  .vf-tl { top: 12px; left: 12px; }
+  .vf-tr { top: 12px; right: 12px; }
+  .vf-bl { bottom: 12px; left: 12px; }
+  .vf-br { bottom: 12px; right: 12px; }
+
   .hud-head {
-    left: 26px;
-    right: 26px;
-    top: 30px;
+    left: 32px;
+    right: 32px;
+    top: 46px;
   }
 
   .hud-rec {
@@ -1078,9 +1094,9 @@ a {
   }
 
   .hud-foot {
-    left: 26px;
-    right: 26px;
-    bottom: 22px;
+    left: 32px;
+    right: 32px;
+    bottom: 30px;
     gap: 18px;
   }
 
