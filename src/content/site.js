@@ -13,6 +13,19 @@ export const site = {
     // { label: 'YOUTUBE', url: 'https://youtube.com/@your-channel' },
     // { label: 'LINKEDIN', url: 'https://linkedin.com/in/your-profile' },
   ],
+  // About panel under the desk. Headshot: drop a portrait (3:4 works
+  // best) into public/about/ and point `headshot` at it. Each string in
+  // `paragraphs` is one paragraph.
+  about: {
+    kicker: 'ABOUT',
+    heading: 'WHO I AM',
+    headshot: '/about/headshot-placeholder.svg',
+    headshotAlt: 'Portrait of Zack Farrell',
+    paragraphs: [
+      'PLACEHOLDER — replace me in src/content/site.js. Two or three short paragraphs work best: who you are, what you make, what you are looking for.',
+      'Second paragraph placeholder. Keep the voice plain and first-person. This block is capped at a comfortable reading width, so long paragraphs are fine.',
+    ],
+  },
   // Attribution for third-party assets currently in use (required for CC-BY).
   // Safe to remove an entry once you replace that asset with your own.
   // Full details: public/models/ATTRIBUTION.md, public/video/ATTRIBUTION.md

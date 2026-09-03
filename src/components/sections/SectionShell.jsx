@@ -14,7 +14,12 @@ export default function SectionShell({ index, sub, title, children }) {
   useEffect(() => {
     const s = useStore.getState()
     if (s.fade && s.phase === 'section') s.setFade(false)
-    return () => clearTimeout(exitTimer.current)
+    // The page behind can scroll (desk → About); freeze it under the overlay
+    document.body.classList.add('is-section')
+    return () => {
+      clearTimeout(exitTimer.current)
+      document.body.classList.remove('is-section')
+    }
   }, [])
 
   const onBack = () => {

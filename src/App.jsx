@@ -4,6 +4,7 @@ import { useStore } from './store'
 import TransitionController from './TransitionController'
 import VideoBackground from './components/VideoBackground'
 import StaticHome from './components/StaticHome'
+import AboutSection from './components/AboutSection'
 import HomeOverlay from './components/ui/HomeOverlay'
 import TransitionFade from './components/ui/TransitionFade'
 import Letterbox from './components/ui/Letterbox'
@@ -60,17 +61,24 @@ export default function App() {
     <BrowserRouter>
       <TransitionController />
       <VideoBackground />
-      {webgl ? (
-        <CanvasBoundary>
-          <Suspense fallback={null}>
-            <DeskCanvas isTouch={isTouch} />
-          </Suspense>
-        </CanvasBoundary>
-      ) : (
-        <StaticHome />
-      )}
-      <div className="vignette" aria-hidden="true" />
-      {webgl && <HomeOverlay isTouch={isTouch} webgl={webgl} />}
+      {/* The desk is a full-height hero; the page scrolls past it to About.
+          Canvas and video stay fixed behind, so About slides over the scene. */}
+      <main className="home-flow">
+        <div className="hero">
+          {webgl ? (
+            <CanvasBoundary>
+              <Suspense fallback={null}>
+                <DeskCanvas isTouch={isTouch} />
+              </Suspense>
+            </CanvasBoundary>
+          ) : (
+            <StaticHome />
+          )}
+          <div className="vignette" aria-hidden="true" />
+          {webgl && <HomeOverlay isTouch={isTouch} webgl={webgl} />}
+        </div>
+        <AboutSection />
+      </main>
       <Routes>
         <Route path="/" element={null} />
         <Route
