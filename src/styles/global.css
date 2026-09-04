@@ -364,6 +364,19 @@ a {
 }
 
 /* Brand palettes */
+.social-tile[data-brand='email'] {
+  --brand-glow: rgba(234, 67, 53, 0.55);
+  background: linear-gradient(135deg, #ff6f61 0%, #ea4335 50%, #c5221f 100%);
+}
+
+/* The resume reads as a document: paper on ink */
+.social-tile[data-brand='resume'] {
+  --brand-glow: rgba(242, 239, 233, 0.35);
+  background: var(--bone);
+  color: var(--ink);
+  border-color: transparent;
+}
+
 .social-tile[data-brand='instagram'] {
   --brand-glow: rgba(238, 42, 123, 0.55);
   background: linear-gradient(60deg, #f9ce34 0%, #ee2a7b 52%, #6228d7 100%);
@@ -391,7 +404,7 @@ a {
 }
 
 .about-tiles {
-  margin-top: 22px;
+  margin-top: 40px;
 }
 
 .footer-nav nav a {

@@ -30,15 +30,7 @@ export default function AboutSection() {
               <p key={i}>{p}</p>
             ))}
           </div>
-          <nav className="about-links" aria-label="Contact">
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-            {site.resume && (
-              <a href={site.resume} target="_blank" rel="noreferrer">
-                Resume (PDF)
-              </a>
-            )}
-          </nav>
-          <SocialTiles className="about-tiles" />
+          <SocialTiles className="about-tiles" contact />
         </div>
       </div>
     </section>
