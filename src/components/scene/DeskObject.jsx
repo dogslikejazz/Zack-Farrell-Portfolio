@@ -6,12 +6,14 @@ import { easing } from 'maath'
 import { useStore } from '../../store'
 import { NARROW_ASPECT, objectPosition, objectSize } from '../../content/deskObjects'
 import FallbackShape from './FallbackShape'
+import { ClapRig, FlashRig } from './deskActions'
 
 // Auto-fit whatever model file is dropped in: scale it to `size` world
 // units, center it on the group origin, and sit its base on y=0 — so
 // swapping in a new .glb never requires retuning the scene.
-function Model({ model, size }) {
-  const { scene } = useGLTF(model)
+function Model({ id, model, size, action }) {
+  const { scene, nodes } = useGLTF(model)
+  const rigRef = useRef(null)
   const fit = useMemo(() => {
     const box = new THREE.Box3().setFromObject(scene)
     const dims = box.getSize(new THREE.Vector3())
@@ -20,7 +22,14 @@ function Model({ model, size }) {
     const center = box.getCenter(new THREE.Vector3())
     return { k, offset: [-center.x * k, -box.min.y * k, -center.z * k] }
   }, [scene, size])
-  return <primitive object={scene} scale={fit.k} position={fit.offset} />
+  return (
+    <group ref={rigRef}>
+      <primitive object={scene} scale={fit.k} position={fit.offset} />
+      {/* Rigs that reach into the model's own nodes live here, inside the
+          prop's tilt/rotation frame; world-space effects sit in DeskObject */}
+      {action === 'clap' && <ClapRig id={id} pivot={nodes.stick_pivot} rig={rigRef} size={size} />}
+    </group>
+  )
 }
 
 class ModelBoundary extends React.Component {
@@ -32,7 +41,12 @@ class ModelBoundary extends React.Component {
     if (this.state.failed) return <FallbackShape id={this.props.id} size={this.props.size} />
     return (
       <Suspense fallback={null}>
-        <Model model={this.props.model} size={this.props.size} />
+        <Model
+          id={this.props.id}
+          model={this.props.model}
+          size={this.props.size}
+          action={this.props.action}
+        />
       </Suspense>
     )
   }
@@ -50,6 +64,7 @@ export default function DeskObject({
   tilt = [0, 0],
   size: baseSize,
   hoverLift,
+  action,
   comingSoon,
   isTouch,
 }) {
@@ -101,13 +116,16 @@ export default function DeskObject({
         {/* Only the prop is tilted — the label anchors in world-up space so
             a leaned model can't drag its chip sideways or down onto itself */}
         <group rotation={[tilt[0], rotationY, tilt[1]]}>
-          <ModelBoundary id={id} model={model} size={size} />
+          <ModelBoundary id={id} model={model} size={size} action={action} />
           {/* Generous invisible hit area so hover doesn't require pixel-perfect aim */}
           <mesh position={[0, size * 0.4, 0]}>
             <boxGeometry args={[size * 1.25, size * 0.95, size * 1.25]} />
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />
           </mesh>
         </group>
+        {/* The burst is a billboard + light in world-up space, so the prop's
+            lean can't tip it behind the model */}
+        {action === 'flash' && <FlashRig id={id} size={size} />}
         {/* Desktop: hover card centred over the prop. Touch/narrow: every
             label is on at once, so the chip must clear the prop. The idle
             camera looks almost straight down, so "up on screen" is world -z

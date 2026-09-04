@@ -18,6 +18,11 @@
 // hidden: optional — pulls the object off the desk, out of the footer
 //       nav, and unroutes its section (URL falls back to the desk).
 //       Delete the line to bring it back.
+// action: optional click animation, played as the camera dives in:
+//       'clap'  — swings the model's hinged stick. Needs a node named
+//                 `stick_pivot` in the .glb, with its origin on the hinge
+//                 pin (see README). A model without one simply won't clap.
+//       'flash' — a quick camera-flash sparkle at the lens
 
 // Screens narrower than this width:height ratio use mobilePosition
 export const NARROW_ASPECT = 0.8
@@ -54,6 +59,7 @@ export const allDeskObjects = [
     tilt: [-0.8, 0.04],
     size: 1.05,
     hoverLift: 0.09,
+    action: 'flash',
     diveOffset: [0, 1.05, 0.45],
   },
   {
@@ -66,6 +72,7 @@ export const allDeskObjects = [
     rotationY: -0.25,
     size: 1.15,
     hoverLift: 0.09,
+    action: 'clap',
     diveOffset: [0, 0.95, 0.5],
   },
   {

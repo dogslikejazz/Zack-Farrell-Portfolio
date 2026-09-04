@@ -59,7 +59,7 @@ The current video is a Pexels placeholder (night highway) — details in `public
 npx @gltf-transform/cli optimize my-camera.glb public/models/camera.glb --compress quantize --texture-size 1024
 ```
 
-3. Overwrite `public/models/camera.glb` (or `clapperboard.glb`). The site **auto-scales and grounds any model**, so it should just work — if the resting angle looks off, tweak `rotationY`/`size` for that object in `src/content/deskObjects.js`.
+3. Overwrite `public/models/camera.glb` (or `clapperboard.glb`). The site **auto-scales and grounds any model**, so it should just work — if the resting angle looks off, tweak `rotationY`/`size` for that object in `src/content/deskObjects.js`. One extra for the **clapperboard**: its clap animation swings a node named `stick_pivot`, so in Blender parent the hinged stick to an empty called `stick_pivot` placed on the hinge pin (the current file is rigged this way). A model without that node still works — it just won't clap.
 4. Once you replace the camera model, you can delete the "CAMERA MODEL: DOOK" credit in `src/content/site.js` (it's legally required only while his CC-BY model is in use). Current model credits: `public/models/ATTRIBUTION.md`.
 
 ## Add a THIRD desk object later (script paper → Writing)

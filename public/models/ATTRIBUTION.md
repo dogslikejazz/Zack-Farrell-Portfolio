@@ -15,7 +15,7 @@
 - **License:** CC0 1.0 (Public Domain Dedication) — https://creativecommons.org/publicdomain/zero/1.0/
 - **Source URL:** https://opengameart.org/content/clapperboard-claqueta
 - **Attribution legally required:** NO (CC0). Credit is appreciated but not required.
-- Modifications: converted from OBJ to GLB (obj2gltf), optimized with glTF-Transform (quantize compression).
+- Modifications: converted from OBJ to GLB (obj2gltf), optimized with glTF-Transform (quantize compression); the single mesh was split into a fixed board and a hinged stick (nodes `stick_pivot` → `stick`, pivot on the hinge bolt) so the site can animate the clap.
 
 ## headphones.glb
 - **Model name:** Headphones
