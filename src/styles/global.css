@@ -1160,14 +1160,14 @@ a {
 
 .about-inner {
   display: grid;
-  grid-template-columns: minmax(220px, 340px) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
   gap: 72px;
   align-items: start;
   max-width: 1180px;
   margin: 0 auto;
 }
 
-/* Headshot sits in a slate frame like a contact-sheet print */
+/* Headshot sits in a slate frame like a contact-sheet print (square crop) */
 .about-portrait {
   position: relative;
   padding: 10px;
@@ -1178,7 +1178,7 @@ a {
 .about-portrait img {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
@@ -1335,7 +1335,7 @@ a {
   }
 
   .about-portrait {
-    max-width: 260px;
+    max-width: 300px;
   }
 
   .about-text {

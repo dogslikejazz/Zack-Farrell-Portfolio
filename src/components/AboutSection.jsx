@@ -11,7 +11,10 @@ export default function AboutSection() {
     <section id="about" className="about" aria-labelledby="about-heading">
       <div className="about-inner">
         <figure className="about-portrait">
-          <img src={about.headshot} alt={about.headshotAlt || ''} width="600" height="800" loading="lazy" />
+          <picture>
+            {about.headshotWebp && <source type="image/webp" srcSet={about.headshotWebp} />}
+            <img src={about.headshot} alt={about.headshotAlt || ''} width="1200" height="1200" loading="lazy" />
+          </picture>
         </figure>
         <div className="about-body">
           <p className="slate-row about-kicker">

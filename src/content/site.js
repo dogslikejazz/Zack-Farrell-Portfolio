@@ -16,14 +16,15 @@ export const site = {
   // Resume PDF — drop the file into public/ with this exact name (or change
   // the name here). Set to null to hide every RESUME link.
   resume: '/Zack-Farrell-Resume.pdf',
-  // About panel under the desk. Headshot: drop a portrait (3:4 works
-  // best) into public/about/ and point `headshot` at it. Each string in
+  // About panel under the desk. Headshot: a square, web-sized JPG (plus a
+  // WebP twin with the same name) in public/about/. Each string in
   // `paragraphs` is one paragraph.
   about: {
     kicker: 'ABOUT',
     heading: 'WHO I AM',
-    headshot: '/about/headshot-placeholder.svg',
-    headshotAlt: 'Portrait of Zack Farrell',
+    headshot: '/about/headshot.jpg',
+    headshotWebp: '/about/headshot.webp',
+    headshotAlt: 'Zack Farrell smiling while shooting on a Sony mirrorless camera at night',
     paragraphs: [
       'PLACEHOLDER — replace me in src/content/site.js. Two or three short paragraphs work best: who you are, what you make, what you are looking for.',
       'Second paragraph placeholder. Keep the voice plain and first-person. This block is capped at a comfortable reading width, so long paragraphs are fine.',
