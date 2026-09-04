@@ -305,15 +305,6 @@ a {
   pointer-events: auto;
 }
 
-.footer-row {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px 40px;
-  flex-wrap: wrap;
-}
-
 .footer-nav nav {
   display: flex;
   gap: 26px;
@@ -1306,10 +1297,6 @@ a {
 
   .footer-nav nav {
     gap: 8px 20px;
-  }
-
-  .footer-row {
-    gap: 18px;
   }
 
   .social-tiles {

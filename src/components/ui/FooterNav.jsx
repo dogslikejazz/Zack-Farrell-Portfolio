@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useStore } from '../../store'
 import { deskObjects } from '../../content/deskObjects'
 import { site } from '../../content/site'
-import SocialTiles from './SocialTiles'
 
 // Real hrefs (crawlable, keyboard-reachable) that trigger the cinematic
 // dive when the 3D scene is available, and act as plain links otherwise.
@@ -23,23 +22,20 @@ export default function FooterNav({ webgl }) {
 
   return (
     <footer className="footer-nav">
-      <div className="footer-row">
-        <nav aria-label="Portfolio sections">
-          {deskObjects.map((obj) => (
-            <Link key={obj.id} to={obj.route} onClick={(e) => onNav(e, obj)}>
-              {obj.label}
-            </Link>
-          ))}
-          {site.about && <a href="#about">ABOUT ↓</a>}
-          <a href={`mailto:${site.email}`}>CONTACT</a>
-          {site.resume && (
-            <a href={site.resume} target="_blank" rel="noreferrer">
-              RESUME
-            </a>
-          )}
-        </nav>
-        <SocialTiles />
-      </div>
+      <nav aria-label="Portfolio sections">
+        {deskObjects.map((obj) => (
+          <Link key={obj.id} to={obj.route} onClick={(e) => onNav(e, obj)}>
+            {obj.label}
+          </Link>
+        ))}
+        {site.about && <a href="#about">ABOUT ↓</a>}
+        <a href={`mailto:${site.email}`}>CONTACT</a>
+        {site.resume && (
+          <a href={site.resume} target="_blank" rel="noreferrer">
+            RESUME
+          </a>
+        )}
+      </nav>
       <p className="footer-fine">
         © {new Date().getFullYear()} {site.name}
         {site.credits.length > 0 && (
