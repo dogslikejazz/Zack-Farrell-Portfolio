@@ -4,7 +4,7 @@
 
 export const site = {
   name: 'Zack Farrell',
-  tagline: 'Filmmaker & Photographer',
+  tagline: 'Videographer & Photographer',
   location: 'Gainesville, FL',
   school: 'University of Florida — Media Production',
   email: 'zackfarrellmedia@gmail.com',
