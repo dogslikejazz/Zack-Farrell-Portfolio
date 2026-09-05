@@ -50,21 +50,13 @@
 
 export const films = [
   {
-    id: 'reel-01',
-    title: 'UNTITLED PROJECT',
-    role: 'Director',
+    id: 'knead-welcome',
+    title: 'WELCOME TO KNEAD',
+    role: 'Director / Editor',
     year: 2026,
-    source: 'local',
-    thumb: '/films/thumbs/placeholder-reel-01.svg',
-    description: 'Replace me in src/content/films.js — see the notes at the top of that file.',
-  },
-  {
-    id: 'reel-02',
-    title: 'SECOND PROJECT',
-    role: 'DP / Editor',
-    year: 2025,
-    source: 'local',
-    thumb: '/films/thumbs/placeholder-reel-02.svg',
-    description: 'Replace me in src/content/films.js — see the notes at the top of that file.',
+    source: 'youtube',
+    videoId: 'SKVmMpUL1K4',
+    description:
+      'Brand intro for Knead, a startup building a no-code, drag-and-drop builder for trading algorithms. The brief: loud, fast, deliberately over-the-top comedy for social. Concept through final cut.',
   },
 ]
