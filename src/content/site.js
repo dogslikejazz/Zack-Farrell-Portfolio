@@ -7,7 +7,7 @@ export const site = {
   tagline: 'Filmmaker & Photographer',
   location: 'Gainesville, FL',
   school: 'University of Florida — Media Production',
-  email: 'zackfarrell2005@gmail.com',
+  email: 'zackfarrellmedia@gmail.com',
   socials: [
     { label: 'INSTAGRAM', url: 'https://www.instagram.com/zackofarrell/' },
     { label: 'YOUTUBE', url: 'https://www.youtube.com/@zackofarrell' },
