@@ -10,8 +10,8 @@ export const site = {
   email: 'zackfarrell2005@gmail.com',
   socials: [
     { label: 'INSTAGRAM', url: 'https://www.instagram.com/zackofarrell/' },
+    { label: 'YOUTUBE', url: 'https://www.youtube.com/@zackofarrell' },
     { label: 'LINKEDIN', url: 'https://www.linkedin.com/in/zackfarrell/' },
-    // { label: 'YOUTUBE', url: 'https://youtube.com/@your-channel' },
   ],
   // Resume PDF — drop the file into public/ with this exact name (or change
   // the name here). Set to null to hide every RESUME link.
