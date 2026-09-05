@@ -59,4 +59,20 @@ export const films = [
     description:
       'Brand intro for Knead, a startup building a no-code, drag-and-drop builder for trading algorithms. The brief: loud, fast, deliberately over-the-top comedy for social. Concept through final cut.',
   },
+  {
+    id: 'saint-pete-sunset',
+    title: 'SAINT PETE SUNSET 4K',
+    role: 'Shot / Edited',
+    year: 2026,
+    source: 'youtube',
+    videoId: 'P50_wI3br7Q',
+  },
+  {
+    id: 'swamp-donkey-hunting-camp',
+    title: 'SWAMP DONKEY HUNTING CAMP',
+    role: 'Shot / Edited',
+    year: 2026,
+    source: 'youtube',
+    videoId: '4HmfbRrnVCw',
+  },
 ]
