@@ -26,8 +26,8 @@ export const site = {
     headshotWebp: '/about/headshot.webp',
     headshotAlt: 'Zack Farrell smiling while shooting on a Sony mirrorless camera at night',
     paragraphs: [
-      'PLACEHOLDER — replace me in src/content/site.js. Two or three short paragraphs work best: who you are, what you make, what you are looking for.',
-      'Second paragraph placeholder. Keep the voice plain and first-person. This block is capped at a comfortable reading width, so long paragraphs are fine.',
+      "I’m Zachary, a photographer and videographer splitting my time between Gainesville and Tampa, Florida. I’m always looking for new projects, but in the past I’ve shot weddings, marketing videos for a startup, and my own personal projects. I’m in love with the logistical nightmare that filmmaking is, and I’m eager to keep building the technical skills it takes to fully commit to it.",
+      "I’m currently working on my first short film and starting a channel with a friend. I’m looking for an internship — out of state works — and taking on freelance clients. If you’re interested, reach out below.",
     ],
   },
   // Attribution for third-party assets currently in use (required for CC-BY).
