@@ -105,7 +105,7 @@ function SocialNote() {
 
 export default function FilmsGrid() {
   return (
-    <SectionShell index="02" sub="MOTION" title="VIDEO&shy;GRAPHY">
+    <SectionShell index="02" sub="MOTION" title="VIDEOGRAPHY">
       {films.length === 0 ? (
         <p className="empty-note">
           NO FILMS YET — add entries in <code>src/content/films.js</code> (see README).

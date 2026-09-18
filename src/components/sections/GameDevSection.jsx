@@ -41,7 +41,7 @@ function GameCard({ game }) {
 
 export default function GameDevSection() {
   return (
-    <SectionShell index="04" sub="INTERACTIVE" title="GAME DEVEL&shy;OPMENT">
+    <SectionShell index="04" sub="INTERACTIVE" title="GAME DEVELOPMENT">
       {games.length === 0 ? (
         <div className="coming-panel">
           <p className="coming-panel-kicker">STATUS / IN PROGRESS</p>

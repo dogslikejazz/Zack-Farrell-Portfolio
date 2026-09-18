@@ -16,7 +16,6 @@
   --tally: #ff4022;
   --panel: #121214;
   --font-display: 'Big Shoulders Display', 'Arial Narrow', 'Impact', sans-serif;
-  --font-brand: 'brother-xl', 'Big Shoulders Display', 'Arial Narrow', 'Impact', sans-serif;
   --font-mono: 'Courier Prime', 'Courier New', monospace;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -211,11 +210,11 @@ a {
 }
 
 .hud-name {
-  font-family: var(--font-brand);
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(44px, 7vw, 92px);
   line-height: 0.92;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -614,13 +613,9 @@ a {
 }
 
 .section-title {
-  font-family: var(--font-brand);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  /* Brother XL runs ~9.1em for PHOTOGRAPHY. This tracks the 52px side
-     padding so it stays one line; under ~490px the soft hyphen in the
-     title lets it stack as PHOTO- / GRAPHY. */
-  font-size: clamp(48px, calc((100vw - 104px) / 9.5), 128px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(52px, 9vw, 128px);
   line-height: 0.9;
   text-transform: uppercase;
   margin-top: 6px;
@@ -657,10 +652,10 @@ a {
 }
 
 .coming-panel-title {
-  font-family: var(--font-brand);
+  font-family: var(--font-display);
   font-size: clamp(34px, 6vw, 56px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bone);
   margin: 18px 0 14px;
@@ -1120,9 +1115,8 @@ a {
 }
 
 .static-name {
-  font-family: var(--font-brand);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(48px, 9vw, 110px);
   line-height: 0.92;
   text-transform: uppercase;
@@ -1218,12 +1212,9 @@ a {
 }
 
 .about-heading {
-  font-family: var(--font-brand);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  /* Two-column About: the text column is roughly 100vw - 536px wide and
-     "WHO I AM" runs ~5.9em in Brother XL, so track the column, not the viewport. */
-  font-size: clamp(32px, calc((100vw - 536px) / 6.2), 104px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 104px);
   line-height: 0.9;
   text-transform: uppercase;
   margin-top: 10px;
@@ -1299,11 +1290,6 @@ a {
     left: 32px;
     right: 32px;
     top: 46px;
-  }
-
-  .about-heading {
-    /* Single column here, so the viewport is the constraint again. */
-    font-size: clamp(48px, 7vw, 104px);
   }
 
   .hud-rec {

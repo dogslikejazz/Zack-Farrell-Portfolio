@@ -41,7 +41,7 @@ export default function SectionShell({ index, sub, title, children }) {
   }
 
   return (
-    <section className="section-shell" aria-label={title.replace(/\u00AD/g, '')}>
+    <section className="section-shell" aria-label={title}>
       <header className="section-head">
         <button type="button" className="back-btn" onClick={onBack}>
           ← BACK TO DESK
