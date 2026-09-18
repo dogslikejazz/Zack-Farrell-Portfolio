@@ -99,7 +99,7 @@ export default function PhotographyGallery() {
   const groups = GROUPS.filter((g) => g.items.length > 0)
 
   return (
-    <SectionShell index="01" sub="STILLS" title="PHOTOGRAPHY">
+    <SectionShell index="01" sub="STILLS" title="PHOTO&shy;GRAPHY">
       {photos.length === 0 ? (
         <p className="empty-note">
           NO STILLS YET — drop exports in <code>photo-originals/</code> and run{' '}

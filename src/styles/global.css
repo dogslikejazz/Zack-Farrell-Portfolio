@@ -16,6 +16,7 @@
   --tally: #ff4022;
   --panel: #121214;
   --font-display: 'Big Shoulders Display', 'Arial Narrow', 'Impact', sans-serif;
+  --font-brand: 'colt-soft', 'Big Shoulders Display', 'Arial Narrow', 'Impact', sans-serif;
   --font-mono: 'Courier Prime', 'Courier New', monospace;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -210,9 +211,10 @@ a {
 }
 
 .hud-name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(44px, 7vw, 92px);
+  font-family: var(--font-brand);
+  font-weight: 900;
+  /* FARRELL is ~9.8em in Colt Soft Black; keep it inside the 32px HUD inset on phones. */
+  font-size: clamp(28px, min(6.3vw, calc((100vw - 64px) / 10.2)), 92px);
   line-height: 0.92;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -613,9 +615,12 @@ a {
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(52px, 9vw, 128px);
+  font-family: var(--font-brand);
+  font-weight: 900;
+  /* Colt Soft Black is wide: PHOTOGRAPHY runs ~16.3em. This tracks the
+     52px side padding so it stays one line; under ~715px the soft hyphen
+     in the title lets it stack as PHOTO- / GRAPHY. */
+  font-size: clamp(36px, calc(5.88vw - 6px), 128px);
   line-height: 0.9;
   text-transform: uppercase;
   margin-top: 6px;
@@ -652,9 +657,9 @@ a {
 }
 
 .coming-panel-title {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-size: clamp(34px, 6vw, 56px);
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--bone);
@@ -1115,9 +1120,10 @@ a {
 }
 
 .static-name {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(48px, 9vw, 110px);
+  font-family: var(--font-brand);
+  font-weight: 900;
+  /* .static-home pads 8vw per side; 8.2vw keeps FARRELL (~9.8em) inside it. */
+  font-size: clamp(28px, 8.2vw, 110px);
   line-height: 0.92;
   text-transform: uppercase;
 }
@@ -1212,9 +1218,11 @@ a {
 }
 
 .about-heading {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(48px, 7vw, 104px);
+  font-family: var(--font-brand);
+  font-weight: 900;
+  /* Two-column About: the text column is roughly 100vw - 536px wide and
+     "WHO I" runs ~6.4em in Colt Soft Black, so track the column, not the viewport. */
+  font-size: clamp(32px, calc((100vw - 536px) / 6.8), 104px);
   line-height: 0.9;
   text-transform: uppercase;
   margin-top: 10px;
@@ -1290,6 +1298,16 @@ a {
     left: 32px;
     right: 32px;
     top: 46px;
+  }
+
+  .hud-name {
+    /* REC is hidden here, so the wordmark can use the full 32px-inset width. */
+    font-size: clamp(28px, min(8vw, calc((100vw - 64px) / 10.2)), 92px);
+  }
+
+  .about-heading {
+    /* Single column here, so the viewport is the constraint again. */
+    font-size: clamp(48px, 7vw, 104px);
   }
 
   .hud-rec {
