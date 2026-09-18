@@ -8,3 +8,4 @@ dist
 # generated into public/photos/ by `npm run photos`. Keep masters out of
 # git and off the site.
 photo-originals
+desktop.ini

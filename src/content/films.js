@@ -61,7 +61,7 @@ export const films = [
   },
   {
     id: 'saint-pete-sunset',
-    title: 'SAINT PETE SUNSET 4K',
+    title: 'A SUNRISE IN SAINT PETE',
     role: 'Shot / Edited',
     year: 2026,
     source: 'youtube',
@@ -69,7 +69,7 @@ export const films = [
   },
   {
     id: 'swamp-donkey-hunting-camp',
-    title: 'SWAMP DONKEY HUNTING CAMP',
+    title: 'WHITE OAK HUNTING CAMP',
     role: 'Shot / Edited',
     year: 2026,
     source: 'youtube',
